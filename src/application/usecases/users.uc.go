@@ -3,26 +3,30 @@ package usecases
 import (
 	"encoding/base64"
 	"github.com/mtsluna/go-market/src/domain/contracts"
-	repo "github.com/mtsluna/go-market/src/infrastructure/repositories"
+	"github.com/mtsluna/go-market/src/infrastructure/repositories"
 )
 
-func UsersFindAll() [] contracts.User{
+type UsersUc struct {
+	repo repositories.UserRepo
+}
 
-	var array = repo.FindAll()
+func (uc *UsersUc) FindAll() [] contracts.User{
+
+	var array = uc.repo.FindAll()
 
 	return array
 
 }
 
-func UsersFindById(id string) contracts.User {
+func (uc *UsersUc) FindById(id string) contracts.User {
 
-	var user = repo.FindById(id)
+	var user = uc.repo.FindById(id)
 
 	return user
 
 }
 
-func UsersSave(user contracts.User) contracts.User {
+func (uc *UsersUc) Save(user contracts.User) contracts.User {
 
 	//encript password
 	codedPassword := base64.StdEncoding.EncodeToString([]byte(user.Password))
@@ -30,15 +34,15 @@ func UsersSave(user contracts.User) contracts.User {
 	//Assign encrypt password
 	user.Password = codedPassword
 
-	user = repo.Save(user)
+	user = uc.repo.Save(user)
 
 	return user
 
 }
 
-func UsersUpdate(id string, user contracts.User) contracts.User {
+func (uc *UsersUc) Update(id string, user contracts.User) contracts.User {
 
-	user = repo.Update(id, user)
+	user = uc.repo.Update(id, user)
 
 	return user
 

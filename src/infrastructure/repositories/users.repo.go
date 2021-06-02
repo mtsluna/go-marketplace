@@ -1,7 +1,6 @@
 package repositories
 
 import (
-	"context"
 	"fmt"
 	"github.com/mitchellh/mapstructure"
 	"github.com/mtsluna/go-market/src/domain/contracts"
@@ -9,10 +8,13 @@ import (
 	"log"
 )
 
-const COLLECTION = "users"
-var ctx = context.Background()
+type UserRepo struct {
 
-func FindAll() [] contracts.User {
+}
+
+const COLLECTION = "users"
+
+func (repo *UserRepo) FindAll() [] contracts.User {
 
 	client := BaseRepo()
 	var array [] contracts.User
@@ -38,7 +40,7 @@ func FindAll() [] contracts.User {
 	return array
 }
 
-func FindById(id string) contracts.User {
+func (repo *UserRepo) FindById(id string) contracts.User {
 
 	client := BaseRepo()
 	doc, err := client.Collection(COLLECTION).Doc(id).Get(ctx)
@@ -52,7 +54,7 @@ func FindById(id string) contracts.User {
 	return user
 }
 
-func Save(user contracts.User) contracts.User {
+func (repo *UserRepo) Save(user contracts.User) contracts.User {
 
 	client := BaseRepo()
 	fmt.Println(user)
@@ -66,7 +68,7 @@ func Save(user contracts.User) contracts.User {
 	return user
 }
 
-func Update(id string, user contracts.User) contracts.User {
+func (repo *UserRepo) Update(id string, user contracts.User) contracts.User {
 
 	client := BaseRepo()
 	_, err := client.Collection(COLLECTION).Doc(id).Set(ctx, user)

@@ -8,7 +8,7 @@ import (
 	"log"
 )
 
-var CTX = context.Background()
+var ctx = context.Background()
 
 func BaseRepo() *firestore.Client {
 
@@ -18,12 +18,12 @@ func BaseRepo() *firestore.Client {
 
 	optionConfig := option.WithCredentialsFile("./config/credentials.json")
 
-	app, err := firebase.NewApp(CTX, config, optionConfig)
+	app, err := firebase.NewApp(ctx, config, optionConfig)
 	if err != nil {
 		log.Fatalf("error initializing app: %v\n", err)
 	}
 
-	client, err := app.Firestore(CTX)
+	client, err := app.Firestore(ctx)
 	if err != nil {
 		log.Fatal(err)
 	}
