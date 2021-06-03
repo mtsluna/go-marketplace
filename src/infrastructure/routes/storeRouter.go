@@ -15,6 +15,7 @@ func StoreRouter(router *gin.RouterGroup) {
 		router.GET("/:id", storeHdlr.GetById)
 		router.POST("", storeHdlr.Save)
 		router.PUT("/:id", storeHdlr.Update)
+		router.DELETE("/:id", storeHdlr.Delete)
 	}
 
 }

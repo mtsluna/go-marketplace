@@ -76,3 +76,14 @@ func (repo *StoreRepo) Update(id string, store contracts.Store) contracts.Store 
 
 	return store
 }
+
+func (repo *StoreRepo) Delete(id string) bool{
+
+	client := BaseRepo()
+	_, err := client.Collection(COLLECTION_STORE).Doc(id).Delete(ctx)
+	if err != nil {
+		log.Fatalln(err)
+		return false
+	}
+	return true
+}

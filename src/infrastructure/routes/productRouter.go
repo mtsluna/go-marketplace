@@ -17,6 +17,7 @@ func ProductRouter(router *gin.RouterGroup) {
 		router.GET("/:id", productHdlr.GetById)
 		router.POST("", productHdlr.Save)
 		router.PUT("/:id", productHdlr.Update)
+		router.DELETE("/:id", productHdlr.Delete)
 	}
 
 }

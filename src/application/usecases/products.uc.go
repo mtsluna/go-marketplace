@@ -57,3 +57,11 @@ func (uc *ProductsUc) Update(id string, product contracts.Product) contracts.Pro
 
 }
 
+func (uc *ProductsUc) Delete(id string) bool {
+
+	deleted := uc.repo.Delete(id)
+
+	return deleted
+
+}
+

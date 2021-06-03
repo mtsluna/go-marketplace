@@ -81,4 +81,17 @@ func (hdlr *ProductsHdlr) Update(ctx *gin.Context) {
 
 }
 
+func (hdlr *ProductsHdlr) Delete(ctx *gin.Context) {
+
+	id := ctx.Param("id")
+	deleted := hdlr.uc.Delete(id)
+
+	if deleted == true {
+		ctx.JSON(204, "")
+	} else {
+		ctx.JSON(404, "")
+	}
+
+}
+
 

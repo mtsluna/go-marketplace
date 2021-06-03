@@ -47,3 +47,11 @@ func (uc *UsersUc) Update(id string, user contracts.User) contracts.User {
 	return user
 
 }
+
+func (uc *UsersUc) Delete(id string) bool {
+
+	deleted := uc.repo.Delete(id)
+
+	return deleted
+
+}

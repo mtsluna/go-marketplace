@@ -127,3 +127,14 @@ func (repo *ProductsRepo) Update(id string, item contracts.Product) contracts.Pr
 
 	return item
 }
+
+func (repo *ProductsRepo) Delete(id string) bool{
+
+	client := BaseRepo()
+	_, err := client.Collection(COLLECTION_PRODUCTS).Doc(id).Delete(ctx)
+	if err != nil {
+		log.Fatalln(err)
+		return false
+	}
+	return true
+}

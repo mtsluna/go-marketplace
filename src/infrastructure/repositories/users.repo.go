@@ -81,6 +81,17 @@ func (repo *UserRepo) Update(id string, user contracts.User) contracts.User {
 	return user
 }
 
+func (repo *UserRepo) Delete(id string) bool{
+
+	client := BaseRepo()
+	_, err := client.Collection(COLLECTION).Doc(id).Delete(ctx)
+	if err != nil {
+		log.Fatalln(err)
+		return false
+	}
+	return true
+}
+
 func removeDataFromUser(user contracts.User) contracts.User {
 	user.Password = ""
 	return user
