@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	router "github.com/mtsluna/go-market/src/infrastructure/routes"
 )
@@ -11,6 +12,8 @@ func main() {
 
 	// Routers
 	router.Router(server)
+
+	server.Use(cors.Default())
 
 	server.Run()
 }

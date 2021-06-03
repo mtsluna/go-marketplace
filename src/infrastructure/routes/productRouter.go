@@ -15,7 +15,7 @@ func ProductRouter(router *gin.RouterGroup) {
 		router.GET("/by/store/:storeId", productHdlr.GetAllByStoreId)
 		router.GET("/by/title/:title", productHdlr.GetAllByTitle)
 		router.GET("/:id", productHdlr.GetById)
-		router.POST("/", productHdlr.Save)
+		router.POST("", productHdlr.Save)
 		router.PUT("/:id", productHdlr.Update)
 	}
 
