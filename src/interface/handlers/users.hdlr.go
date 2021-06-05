@@ -31,10 +31,11 @@ func (hdlr *UserHdlr) GetById(ctx *gin.Context) {
 
 func (hdlr *UserHdlr) Save(ctx *gin.Context) {
 
+	id := ctx.Param("id")
 	var user contracts.User
-	raw, err :=  ctx.GetRawData()
+	raw, err := ctx.GetRawData()
 	err = json.Unmarshal(raw, &user)
-	user = hdlr.uc.Save(user)
+	user = hdlr.uc.Save(id, user)
 
 	if err != nil {
 		log.Fatal(err)
@@ -46,7 +47,7 @@ func (hdlr *UserHdlr) Update(ctx *gin.Context) {
 
 	id := ctx.Param("id")
 	var user contracts.User
-	raw, err :=  ctx.GetRawData()
+	raw, err := ctx.GetRawData()
 	err = json.Unmarshal(raw, &user)
 	user = hdlr.uc.Update(id, user)
 
@@ -69,4 +70,3 @@ func (hdlr *UserHdlr) Delete(ctx *gin.Context) {
 	}
 
 }
-

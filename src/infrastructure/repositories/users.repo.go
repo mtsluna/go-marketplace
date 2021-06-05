@@ -9,15 +9,14 @@ import (
 )
 
 type UserRepo struct {
-
 }
 
 const COLLECTION = "users"
 
-func (repo *UserRepo) FindAll() [] contracts.User {
+func (repo *UserRepo) FindAll() []contracts.User {
 
 	client := BaseRepo()
-	var array [] contracts.User
+	var array []contracts.User
 	iter := client.Collection(COLLECTION).Documents(ctx)
 	for {
 		doc, err := iter.Next()
@@ -54,15 +53,15 @@ func (repo *UserRepo) FindById(id string) contracts.User {
 	return user
 }
 
-func (repo *UserRepo) Save(user contracts.User) contracts.User {
+func (repo *UserRepo) Save(id string, user contracts.User) contracts.User {
 
 	client := BaseRepo()
 	fmt.Println(user)
-	doc, _, err := client.Collection(COLLECTION).Add(ctx, user)
+	_, err := client.Collection(COLLECTION).Doc(id).Set(ctx, user)
 	if err != nil {
 		log.Fatalln(err)
 	}
-	user.Id = doc.ID
+	user.Id = id
 	user = removeDataFromUser(user)
 
 	return user
@@ -81,7 +80,7 @@ func (repo *UserRepo) Update(id string, user contracts.User) contracts.User {
 	return user
 }
 
-func (repo *UserRepo) Delete(id string) bool{
+func (repo *UserRepo) Delete(id string) bool {
 
 	client := BaseRepo()
 	_, err := client.Collection(COLLECTION).Doc(id).Delete(ctx)

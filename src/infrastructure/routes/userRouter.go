@@ -13,7 +13,7 @@ func UserRouter(router *gin.RouterGroup) {
 
 		router.GET("", userHdlr.GetAll)
 		router.GET("/:id", userHdlr.GetById)
-		router.POST("", userHdlr.Save)
+		router.POST("/:id", userHdlr.Save)
 		router.PUT("/:id", userHdlr.Update)
 		router.DELETE("/:id", userHdlr.Delete)
 	}

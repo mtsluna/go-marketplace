@@ -10,7 +10,7 @@ type UsersUc struct {
 	repo repositories.UserRepo
 }
 
-func (uc *UsersUc) FindAll() [] contracts.User{
+func (uc *UsersUc) FindAll() []contracts.User {
 
 	var array = uc.repo.FindAll()
 
@@ -26,7 +26,7 @@ func (uc *UsersUc) FindById(id string) contracts.User {
 
 }
 
-func (uc *UsersUc) Save(user contracts.User) contracts.User {
+func (uc *UsersUc) Save(id string, user contracts.User) contracts.User {
 
 	//encript password
 	codedPassword := base64.StdEncoding.EncodeToString([]byte(user.Password))
@@ -34,7 +34,7 @@ func (uc *UsersUc) Save(user contracts.User) contracts.User {
 	//Assign encrypt password
 	user.Password = codedPassword
 
-	user = uc.repo.Save(user)
+	user = uc.repo.Save(id, user)
 
 	return user
 
